@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Personas de AdventureWorks</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; }
+        h1 { color: #19385f; }
+        h2.subtitle { color: #4a6b8a; font-weight: normal; margin-top: -0.5rem; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { padding: 8px; border: 1px solid #bbcbd8; }
+        th { background: #eaf3f7; text-align: left; }
+        .error { color: #aa2222; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Personas - AdventureWorks</h1>
+    <h2 class="subtitle">Cliente Django de la API de AdventureWorks</h2>
+    <p>Consumo de una API REST desarrollada con FastAPI.</p>
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% elif persons %}
+        <p>Registros recibidos: {{ persons|length }}</p>
+        <table>
+            <thead>
+                <tr><th>ID</th><th>Nombre</th><th>Apellido</th></tr>
+            </thead>
+            <tbody>
+                {% for p in persons %}
+                    <tr>
+                        <td>{{ p.BusinessEntityID }}</td>
+                        <td>{{ p.FirstName }}</td>
+                        <td>{{ p.LastName }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>La API no devolvió personas.</p>
+    {% endif %}
+</body>
+</html>
